@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Ofeige\\Rfc14Bundle\\": ""
+      "Ofeige\\Rfc1Bundle\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"
