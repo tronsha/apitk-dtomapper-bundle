@@ -1,4 +1,6 @@
 services:
+    Ofeige\Rfc1Bundle\Service\ArrayHelper: ~
+
     Ofeige\Rfc1Bundle\EventListener\ControllerListener:
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
