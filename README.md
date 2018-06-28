@@ -1,4 +1,4 @@
-# rfc1-bundle
+# RFC1 - DTO handling
 
 ## Overview
 This bundle adds versioned DTO support for RESTful API's.
