@@ -4,6 +4,7 @@ services:
             - {name: kernel.event_listener, event: kernel.controller}
 
     Ofeige\Rfc1Bundle\EventListener\MapperListener:
+        autowire: true
         tags:
             - {name: kernel.event_listener, event: kernel.view, priority: 1000}
 
