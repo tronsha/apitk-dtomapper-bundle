@@ -25,6 +25,7 @@ composer install ofeige/rfc1-bundle:dev-master
 ### Setup
 Add this to your services.yaml so the bundle can automatically load and use the mapper services:
 ```
+services:
     App\DtoMapper\:
         resource: '../src/DtoMapper'
         public: true
@@ -34,13 +35,6 @@ Add this to your services.yaml so the bundle can automatically load and use the 
 
 Create a mapper class in the folder `src/DtoMapper` (or whichever you configured) which implements the `MapperInterface` and transforms incoming data into a single DTO:
 ```
-<?php
-
-namespace App\DtoMapper;
-
-use App\Entity\User;
-
-use App\Dto as Dto;
 use Ofeige\Rfc1Bundle\DtoMapper\MapperInterface;
 
 class UserV1Mapper implements MapperInterface
@@ -63,21 +57,23 @@ class UserV1Mapper implements MapperInterface
 
 In your controller replace the `@Rest\View()` annotation with the corresponding `@Rfc1\View()` mentioning the mapper to use:
 ```
-    /**
-     * @Rest\Get("/v1/users")
-     * @Rfc1\View(dtoMapper="App\DtoMapper\UserV1Mapper")
-     *
-     * @param EntityManagerInterface $entityManager
-     * @return User[]
-     */
-    public function getUsersV1(EntityManagerInterface $entityManager)
-    {
-        $userRepository = $entityManager->getRepository(User::class);
+use Ofeige\Rfc1Bundle\Annotation as Rfc1;
 
-        $users = $userRepository->findAll();
+/**
+ * @Rest\Get("/v1/users")
+ * @Rfc1\View(dtoMapper="App\DtoMapper\UserV1Mapper")
+ *
+ * @param EntityManagerInterface $entityManager
+ * @return User[]
+ */
+public function getUsersV1(EntityManagerInterface $entityManager)
+{
+    $userRepository = $entityManager->getRepository(User::class);
 
-        return $users;
-    }
+    $users = $userRepository->findAll();
+
+    return $users;
+}
 ```
 
 The bundle now automatically transform whatever you return in the action with the help of the given mapper into an DTO. When you return an array of data in your controller, the mapper will be called on every single element. You don't have to worry about that.
