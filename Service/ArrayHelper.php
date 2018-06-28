@@ -14,8 +14,10 @@ class ArrayHelper
      * @param array $array
      * @return bool
      */
-    public function isNumeric(array $array): bool
+    public function isNumeric($array): bool
     {
+        if (!is_array($array) && !$array instanceof \Traversable) return false;
+
         foreach ($array as $key => $value) {
             if (!is_int($key)) {
                 return false;
