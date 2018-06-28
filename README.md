@@ -9,7 +9,7 @@ Add this repository to your `composer.json` until it is available at packagist:
 {
     "repositories": [{
             "type": "vcs",
-            "url": "git@github.com:bywulf/rfc1-bundle.git"
+            "url": "git@github.com:ofeige/rfc1-bundle.git"
         }
     ]
 }
