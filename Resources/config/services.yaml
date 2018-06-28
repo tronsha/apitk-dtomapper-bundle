@@ -1,0 +1,13 @@
+services:
+    Ofeige\Rfc1Bundle\EventListener\ControllerListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.controller}
+
+    Ofeige\Rfc1Bundle\EventListener\MapperListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.view, priority: 1000}
+
+    ofeige.rfc1_bundle.view_handler:
+        parent: fos_rest.view_handler.default
+        calls:
+            - ['registerHandler', ['dto', ['@Ofeige\Rfc1Bundle\Handler\PhpViewHandler', 'createResponse']]]
