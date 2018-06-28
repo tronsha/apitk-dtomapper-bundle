@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnusedParameterInspection */
 
 namespace Ofeige\Rfc1Bundle\Handler;
 
@@ -18,6 +18,6 @@ class PhpViewHandler
      */
     public function createResponse(ViewHandler $handler, View $view, Request $request, $format)
     {
-        return new Response('foobar', 200);
+        return new Response(serialize($view->getData()), 200);
     }
 }
