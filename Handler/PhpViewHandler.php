@@ -7,6 +7,13 @@ use FOS\RestBundle\View\ViewHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class PhpViewHandler
+ *
+ * ViewHandler for the fast serialize() responses. (Map "dto" type to the wished mime type in your fos_rest.yaml)
+ *
+ * @package Ofeige\Rfc1Bundle\Handler
+ */
 class PhpViewHandler
 {
     /**

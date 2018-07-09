@@ -2,6 +2,7 @@
 
 namespace Ofeige\Rfc1Bundle\EventListener;
 
+use Ofeige\Rfc1Bundle\DtoMapper\MapperInterface;
 use Ofeige\Rfc1Bundle\Exception\MapperException;
 use Ofeige\Rfc1Bundle\Service\ArrayHelper;
 use Doctrine\Common\Annotations\Reader;
@@ -11,6 +12,14 @@ use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
 use Ofeige\Rfc1Bundle\Annotation as Rfc1;
 
+/**
+ * Class MapperListener
+ *
+ * Applies the Rfc1\View dtoMapper to the by the controller action returned data, so a DTO (or array of DTOs) goes to
+ * the response.
+ *
+ * @package Ofeige\Rfc1Bundle\EventListener
+ */
 class MapperListener
 {
     /**
@@ -34,6 +43,12 @@ class MapperListener
      */
     private $container;
 
+    /**
+     * @param ControllerListener $controllerListener
+     * @param Reader $reader
+     * @param ArrayHelper $arrayHelper
+     * @param ContainerInterface $container
+     */
     public function __construct(ControllerListener $controllerListener, Reader $reader, ArrayHelper $arrayHelper, ContainerInterface $container)
     {
         $this->controllerListener = $controllerListener;
@@ -58,34 +73,28 @@ class MapperListener
             return;
         }
 
-        $methodAnnotations = $this->getAnnotationsByController($this->controllerListener->getCalledController());
-        foreach ($methodAnnotations as $annotation) {
-            if (!$annotation instanceof Rfc1\View) {
-                continue;
-            }
-
-            try {
-                $mapper = $this->container->get($annotation->getDtoMapper());
-            } catch (\Exception $e) {
-                throw new MapperException(sprintf('Mapper "%s" could not be used. %s', $annotation->getDtoMapper(), $e->getMessage()), 500, $e);
-            }
-
-            $data = $event->getControllerResult();
-            if ($this->arrayHelper->isNumeric($data)) {
-                $mappedData = [];
-                foreach ($data as $entry) {
-                    $mappedData[] = $mapper->map($entry);
-                }
-            } else {
-                $mappedData = $mapper->map($data);
-            }
-
-            $event->setControllerResult($mappedData);
-            break;
+        $view = $this->getViewAnnotationByController($this->controllerListener->getCalledController());
+        if (!$view) {
+            return;
         }
+
+        try {
+            /** @var MapperInterface $mapper */
+            $mapper = $this->container->get($view->getDtoMapper());
+        } catch (\Exception $e) {
+            throw new MapperException(sprintf('Mapper "%s" could not be used. %s', $view->getDtoMapper(), $e->getMessage()), 500, $e);
+        }
+
+        $data = $event->getControllerResult();
+
+        $event->setControllerResult($this->mapData($data, $mapper));
     }
 
-    private function getAnnotationsByController(callable $controller): array
+    /**
+     * @param callable $controller
+     * @return null|Rfc1\View
+     */
+    private function getViewAnnotationByController(callable $controller): ?Rfc1\View
     {
         /** @var Controller $controllerObject */
         list($controllerObject, $methodName) = $controller;
@@ -93,6 +102,32 @@ class MapperListener
         $controllerReflectionObject = new \ReflectionObject($controllerObject);
         $reflectionMethod = $controllerReflectionObject->getMethod($methodName);
 
-        return $this->reader->getMethodAnnotations($reflectionMethod);
+        $annotations = $this->reader->getMethodAnnotations($reflectionMethod);
+        foreach ($annotations as $annotation) {
+            if ($annotation instanceof Rfc1\View) {
+                return $annotation;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param object|array $data
+     * @param MapperInterface $mapper
+     * @return object|array
+     */
+    private function mapData($data, MapperInterface $mapper)
+    {
+        if ($this->arrayHelper->isNumeric($data)) {
+            $mappedData = [];
+            foreach ($data as $entry) {
+                $mappedData[] = $mapper->map($entry);
+            }
+        } else {
+            $mappedData = $mapper->map($data);
+        }
+
+        return $mappedData;
     }
 }

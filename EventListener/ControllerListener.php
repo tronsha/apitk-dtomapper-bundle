@@ -4,6 +4,13 @@ namespace Ofeige\Rfc1Bundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
+/**
+ * Class ControllerListener
+ *
+ * Remember, what controller got called in this request, so we can get the corresponding annotation in the ResponseView.
+ *
+ * @package Ofeige\Rfc1Bundle\EventListener
+ */
 class ControllerListener
 {
     /**

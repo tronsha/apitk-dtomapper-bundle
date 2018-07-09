@@ -5,6 +5,10 @@ services:
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
 
+    Ofeige\Rfc1Bundle\EventListener\SwaggerListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.controller}
+
     Ofeige\Rfc1Bundle\EventListener\MapperListener:
         autowire: true
         tags:
