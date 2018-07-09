@@ -78,6 +78,8 @@ public function getUsersV1(EntityManagerInterface $entityManager)
 
 The bundle now automatically transform whatever you return in the action with the help of the given mapper into an DTO. When you return an array of data in your controller, the mapper will be called on every single element. You don't have to worry about that.
 
+Also the bundle auto generates a swagger response with code 200 and the corresponding DTO scheme (respectively an array of DTOs), so you don't have to add the redundant `@SWG\Response()`. For this to work, just take care that your Mapper has a correct return typehint (f.e. `public function map($data): FoobarDto`) and that your controller action has a return annotation, which states if an array or object is returned (f.e. `* @return Foobar[]`). You can still overwrite this by your own `@SWG\Response()` annotation.
+
 ### Serialized DTO view
 If you wish to return the DTOs in a `serialize($dto)` manner instead of json, implement the available dto view handler.
 
