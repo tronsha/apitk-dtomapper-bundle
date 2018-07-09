@@ -7,11 +7,14 @@ use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Reader;
 use EXSyst\Component\Swagger\Operation;
 use EXSyst\Component\Swagger\Response;
-use EXSyst\Component\Swagger\Schema;
 use EXSyst\Component\Swagger\Swagger;
 use Nelmio\ApiDocBundle\Describer\DescriberInterface;
+use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareInterface;
+use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
+use Nelmio\ApiDocBundle\Model\Model;
 use Nelmio\ApiDocBundle\Util\ControllerReflector;
 use Ofeige\Rfc1Bundle\Service\StringHelper;
+use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
 use Ofeige\Rfc1Bundle\Annotation AS Rfc1;
 
@@ -28,8 +31,10 @@ use Ofeige\Rfc1Bundle\Annotation AS Rfc1;
  *
  * @package Ofeige\Rfc11Bundle\Describer
  */
-class AnnotationDescriber implements DescriberInterface
+class AnnotationDescriber implements DescriberInterface, ModelRegistryAwareInterface
 {
+    use ModelRegistryAwareTrait;
+
     /**
      * @var RouteCollection
      */
@@ -97,9 +102,9 @@ class AnnotationDescriber implements DescriberInterface
 
                         $isArray = $this->willReturnArray($classMethod);
 
-                        $api->getDefinitions()->set($shortType, new Schema(['type' => $type]));
+                        $reference = $this->modelRegistry->register(new Model(new Type(Type::BUILTIN_TYPE_OBJECT, false, $type)));
 
-                        $operation->getResponses()->set(200, $this->getResponse($isArray, $shortType));
+                        $operation->getResponses()->set(200, $this->getResponse($isArray, $shortType, $reference));
                     }
                 }
             }
@@ -183,12 +188,13 @@ class AnnotationDescriber implements DescriberInterface
      *
      * @param bool $isArray
      * @param string $shortType
+     * @param string $reference
      * @return Response
      */
-    private function getResponse(bool $isArray, string $shortType): Response
+    private function getResponse(bool $isArray, string $shortType, string $reference): Response
     {
         $typeDefinition = [
-            '$ref' => '#/definitions/' . $shortType,
+            '$ref' => $reference,
         ];
 
         if ($isArray) {
