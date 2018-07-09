@@ -1,6 +1,6 @@
 <?php
 
-namespace Ofeige\Rfc11Bundle\Describer;
+namespace Ofeige\Rfc1Bundle\Describer;
 
 
 use Doctrine\Common\Annotations\Annotation;

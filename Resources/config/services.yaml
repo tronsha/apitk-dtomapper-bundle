@@ -1,5 +1,6 @@
 services:
     Ofeige\Rfc1Bundle\Service\ArrayHelper: ~
+    Ofeige\Rfc1Bundle\Service\StringHelper: ~
 
     Ofeige\Rfc1Bundle\EventListener\ControllerListener:
         tags:
@@ -15,3 +16,12 @@ services:
             - {name: kernel.event_listener, event: kernel.view, priority: 1000}
 
     Ofeige\Rfc1Bundle\Handler\PhpViewHandler: ~
+
+    Ofeige\Rfc1Bundle\Describer\AnnotationDescriber:
+        autowire: true
+        public: false
+        arguments:
+            - '@nelmio_api_doc.routes.default'
+            - '@nelmio_api_doc.controller_reflector'
+        tags:
+            - {name: 'nelmio_api_doc.route_describer', priority: -2000 }
