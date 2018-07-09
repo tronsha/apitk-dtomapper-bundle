@@ -59,8 +59,12 @@ class AnnotationDescriber implements DescriberInterface, ModelRegistryAwareInter
      * @param Reader $reader
      * @param StringHelper $stringHelper
      */
-    public function __construct(RouteCollection $routeCollection, ControllerReflector $controllerReflector, Reader $reader, StringHelper $stringHelper)
-    {
+    public function __construct(
+        RouteCollection $routeCollection,
+        ControllerReflector $controllerReflector,
+        Reader $reader, StringHelper
+        $stringHelper
+    ) {
         $this->routeCollection = $routeCollection;
         $this->controllerReflector = $controllerReflector;
         $this->reader = $reader;
