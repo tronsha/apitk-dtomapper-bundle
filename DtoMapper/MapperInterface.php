@@ -9,7 +9,7 @@ namespace Ofeige\Rfc1Bundle\DtoMapper;
 interface MapperInterface
 {
     /**
-     * Mappes the incoming object into one DTO object.
+     * Maps the incoming object into one DTO object.
      *
      * @param $data
      * @return mixed
