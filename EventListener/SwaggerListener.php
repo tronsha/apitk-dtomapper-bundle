@@ -15,16 +15,6 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  */
 class SwaggerListener
 {
-    /**
-     * @var bool
-     */
-    private $masterRequest = true;
-
-    /**
-     * @var callable|null
-     */
-    private $calledController = null;
-
     public function onKernelController(FilterControllerEvent $event)
     {
         if ($event->getController() instanceof SwaggerUiController) {
@@ -34,10 +24,5 @@ class SwaggerListener
             } catch (\ReflectionException $e) {
             }
         }
-    }
-
-    public function getCalledController(): ?callable
-    {
-        return $this->calledController;
     }
 }
