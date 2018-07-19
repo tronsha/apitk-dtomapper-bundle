@@ -9,7 +9,7 @@ Add this repository to your `composer.json` until it is available at packagist:
 {
     "repositories": [{
             "type": "vcs",
-            "url": "git@github.com:ofeige/rfc1-bundle.git"
+            "url": "git@github.com:CHECK24/rfc1-bundle.git"
         }
     ]
 }
@@ -43,7 +43,7 @@ class UserV1Mapper implements MapperInterface
      * @param User $data
      * @return Dto\UserV1
      */
-    public function map($data)
+    public function map($data): Dto\UserV1
     {
         $userDto = new Dto\UserV1();
         $userDto->setId($data->getId())
