@@ -1,15 +1,14 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\EventListener;
+namespace Shopping\ApiDtoMapperBundle\EventListener;
 
 use Nelmio\ApiDocBundle\Controller\SwaggerUiController;
 use Swagger\Annotations\Get;
-use Swagger\Annotations\Operation;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
  * Class ControllerListener
- * @package Ofeige\Rfc1Bundle\EventListener
+ * @package Shopping\ApiDtoMapperBundle\EventListener
  *
  * Because we auto generate responses, we have to tell Swagger that no response annotation is required. (Kinda hacky :/)
  */

@@ -1,23 +1,23 @@
 services:
-    Ofeige\Rfc1Bundle\Service\ArrayHelper: ~
-    Ofeige\Rfc1Bundle\Service\StringHelper: ~
+    Shopping\ApiDtoMapperBundle\Service\ArrayHelper: ~
+    Shopping\ApiDtoMapperBundle\Service\StringHelper: ~
 
-    Ofeige\Rfc1Bundle\EventListener\ControllerListener:
+    Shopping\ApiDtoMapperBundle\EventListener\ControllerListener:
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
 
-    Ofeige\Rfc1Bundle\EventListener\SwaggerListener:
+    Shopping\ApiDtoMapperBundle\EventListener\SwaggerListener:
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
 
-    Ofeige\Rfc1Bundle\EventListener\MapperListener:
+    Shopping\ApiDtoMapperBundle\EventListener\MapperListener:
         autowire: true
         tags:
             - {name: kernel.event_listener, event: kernel.view, priority: 1000}
 
-    Ofeige\Rfc1Bundle\Handler\PhpViewHandler: ~
+    Shopping\ApiDtoMapperBundle\Handler\PhpViewHandler: ~
 
-    Ofeige\Rfc1Bundle\Describer\AnnotationDescriber:
+    Shopping\ApiDtoMapperBundle\Describer\AnnotationDescriber:
         autowire: true
         public: false
         arguments:

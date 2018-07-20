@@ -17,7 +17,7 @@ Add this repository to your `composer.json` until it is available at packagist:
 
 After that, install the package via composer:
 ```
-composer install ofeige/rfc1-bundle:dev-master
+composer install shopping/api-dto-mapper-bundle:dev-master
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ services:
 
 Create a mapper class in the folder `src/DtoMapper` (or whichever you configured) which implements the `MapperInterface` and transforms incoming data into a single DTO:
 ```
-use Ofeige\Rfc1Bundle\DtoMapper\MapperInterface;
+use Shopping\ApiDtoMapperBundle\DtoMapper\MapperInterface;
 
 class UserV1Mapper implements MapperInterface
 {
@@ -57,7 +57,7 @@ class UserV1Mapper implements MapperInterface
 
 In your controller replace the `@Rest\View()` annotation with the corresponding `@Rfc1\View()` mentioning the mapper to use:
 ```
-use Ofeige\Rfc1Bundle\Annotation as Rfc1;
+use Shopping\ApiDtoMapperBundle\Annotation as Rfc1;
 
 /**
  * @Rest\Get("/v1/users")
@@ -101,7 +101,7 @@ services:
         public: false
         parent: fos_rest.view_handler.default
         calls:
-            - ['registerHandler', ['dto', ['@Ofeige\Rfc1Bundle\Handler\PhpViewHandler', 'createResponse']]]
+            - ['registerHandler', ['dto', ['@Shopping\ApiDtoMapperBundle\Handler\PhpViewHandler', 'createResponse']]]
 ```
 
 When calling the API with the `Accept: application/vnd.demo.dto` header, you will get the DTO as an unserializable string.

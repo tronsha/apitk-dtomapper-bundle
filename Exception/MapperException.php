@@ -1,6 +1,6 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\Exception;
+namespace Shopping\ApiDtoMapperBundle\Exception;
 
 class MapperException extends \Exception
 {

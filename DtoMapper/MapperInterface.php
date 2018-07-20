@@ -1,10 +1,10 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\DtoMapper;
+namespace Shopping\ApiDtoMapperBundle\DtoMapper;
 
 /**
  * Interface MapperInterface
- * @package Ofeige\Rfc1Bundle\DtoMapper
+ * @package Shopping\ApiDtoMapperBundle\DtoMapper
  */
 interface MapperInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\Describer;
+namespace Shopping\ApiDtoMapperBundle\Describer;
 
 
 use Doctrine\Common\Annotations\Annotation;
@@ -13,10 +13,10 @@ use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareInterface;
 use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
 use Nelmio\ApiDocBundle\Model\Model;
 use Nelmio\ApiDocBundle\Util\ControllerReflector;
-use Ofeige\Rfc1Bundle\Service\StringHelper;
+use Shopping\ApiDtoMapperBundle\Service\StringHelper;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
-use Ofeige\Rfc1Bundle\Annotation AS Rfc1;
+use Shopping\ApiDtoMapperBundle\Annotation AS Rfc1;
 
 /**
  * Class AnnotationDescriber
@@ -29,7 +29,7 @@ use Ofeige\Rfc1Bundle\Annotation AS Rfc1;
  * * Corresponding dtoMapper has a return typehint
  * * Controller action has a return-annotation, which states the return of an array or not (f.e. * @ return Foobar[])
  *
- * @package Ofeige\Rfc11Bundle\Describer
+ * @package Shopping\ApiDtoMapperBundle\Describer
  */
 class AnnotationDescriber implements DescriberInterface, ModelRegistryAwareInterface
 {

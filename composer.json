@@ -1,6 +1,6 @@
 {
-  "name": "ofeige/rfc1-bundle",
-  "version": "0.1.0",
+  "name": "shopping/api-dto-mapper-bundle",
+  "version": "0.9.0",
   "type": "symfony-bundle",
   "description": "This bundle provides mapping helpers to map rest action to DTOs and render them serialized.",
   "authors": [
@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Ofeige\\Rfc1Bundle\\": ""
+      "Shopping\\ApiDtoMapperBundle\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"

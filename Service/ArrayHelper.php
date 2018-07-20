@@ -1,6 +1,6 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\Service;
+namespace Shopping\ApiDtoMapperBundle\Service;
 
 /**
  * Class ArrayHelper

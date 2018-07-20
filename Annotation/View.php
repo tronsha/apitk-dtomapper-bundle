@@ -1,6 +1,6 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\Annotation;
+namespace Shopping\ApiDtoMapperBundle\Annotation;
 
 use \FOS\RestBundle\Controller\Annotations as Rest;
 

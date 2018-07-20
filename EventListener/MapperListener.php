@@ -1,16 +1,16 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\EventListener;
+namespace Shopping\ApiDtoMapperBundle\EventListener;
 
-use Ofeige\Rfc1Bundle\DtoMapper\MapperInterface;
-use Ofeige\Rfc1Bundle\Exception\MapperException;
-use Ofeige\Rfc1Bundle\Service\ArrayHelper;
+use Shopping\ApiDtoMapperBundle\DtoMapper\MapperInterface;
+use Shopping\ApiDtoMapperBundle\Exception\MapperException;
+use Shopping\ApiDtoMapperBundle\Service\ArrayHelper;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
-use Ofeige\Rfc1Bundle\Annotation as Rfc1;
+use Shopping\ApiDtoMapperBundle\Annotation as Rfc1;
 
 /**
  * Class MapperListener
@@ -18,7 +18,7 @@ use Ofeige\Rfc1Bundle\Annotation as Rfc1;
  * Applies the Rfc1\View dtoMapper to the by the controller action returned data, so a DTO (or array of DTOs) goes to
  * the response.
  *
- * @package Ofeige\Rfc1Bundle\EventListener
+ * @package Shopping\ApiDtoMapperBundle\EventListener
  */
 class MapperListener
 {
