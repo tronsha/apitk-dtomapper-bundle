@@ -1,4 +1,4 @@
-# RFC1 - DTO handling
+# api-dto-mapper-bundle - DTO handling
 
 ## Overview
 This bundle adds versioned DTO support for RESTful API's.
@@ -9,7 +9,7 @@ Add this repository to your `composer.json` until it is available at packagist:
 {
     "repositories": [{
             "type": "vcs",
-            "url": "git@github.com:CHECK24/rfc1-bundle.git"
+            "url": "git@github.com:CHECK24/api-dto-mapper-bundle.git"
         }
     ]
 }
@@ -55,13 +55,13 @@ class UserV1Mapper implements MapperInterface
 }
 ```
 
-In your controller replace the `@Rest\View()` annotation with the corresponding `@Rfc1\View()` mentioning the mapper to use:
+In your controller replace the `@Rest\View()` annotation with the corresponding `@Dto\View()` mentioning the mapper to use:
 ```
-use Shopping\ApiDtoMapperBundle\Annotation as Rfc1;
+use Shopping\ApiDtoMapperBundle\Annotation as Dto;
 
 /**
  * @Rest\Get("/v1/users")
- * @Rfc1\View(dtoMapper="App\DtoMapper\UserV1Mapper")
+ * @Dto\View(dtoMapper="App\DtoMapper\UserV1Mapper")
  *
  * @param EntityManagerInterface $entityManager
  * @return User[]

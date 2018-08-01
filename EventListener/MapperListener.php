@@ -10,12 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
-use Shopping\ApiDtoMapperBundle\Annotation as Rfc1;
+use Shopping\ApiDtoMapperBundle\Annotation as Dto;
 
 /**
  * Class MapperListener
  *
- * Applies the Rfc1\View dtoMapper to the by the controller action returned data, so a DTO (or array of DTOs) goes to
+ * Applies the Dto\View dtoMapper to the by the controller action returned data, so a DTO (or array of DTOs) goes to
  * the response.
  *
  * @package Shopping\ApiDtoMapperBundle\EventListener
@@ -92,9 +92,9 @@ class MapperListener
 
     /**
      * @param callable $controller
-     * @return null|Rfc1\View
+     * @return null|Dto\View
      */
-    private function getViewAnnotationByController(callable $controller): ?Rfc1\View
+    private function getViewAnnotationByController(callable $controller): ?Dto\View
     {
         /** @var Controller $controllerObject */
         list($controllerObject, $methodName) = $controller;
@@ -104,7 +104,7 @@ class MapperListener
 
         $annotations = $this->reader->getMethodAnnotations($reflectionMethod);
         foreach ($annotations as $annotation) {
-            if ($annotation instanceof Rfc1\View) {
+            if ($annotation instanceof Dto\View) {
                 return $annotation;
             }
         }

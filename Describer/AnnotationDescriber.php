@@ -16,7 +16,7 @@ use Nelmio\ApiDocBundle\Util\ControllerReflector;
 use Shopping\ApiDtoMapperBundle\Service\StringHelper;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
-use Shopping\ApiDtoMapperBundle\Annotation AS Rfc1;
+use Shopping\ApiDtoMapperBundle\Annotation AS Dto;
 
 /**
  * Class AnnotationDescriber
@@ -25,7 +25,7 @@ use Shopping\ApiDtoMapperBundle\Annotation AS Rfc1;
  *
  * The following conditions must match:
  * * No Response(200) annotation given
- * * Rfc1\View annotation with dtoMapper given
+ * * Dto\View annotation with dtoMapper given
  * * Corresponding dtoMapper has a return typehint
  * * Controller action has a return-annotation, which states the return of an array or not (f.e. * @ return Foobar[])
  *
@@ -158,11 +158,11 @@ class AnnotationDescriber implements DescriberInterface, ModelRegistryAwareInter
      * Returns the view annotation.
      *
      * @param Annotation[] $annotations
-     * @return null|Rfc1\View
+     * @return null|Dto\View
      */
-    private function getView(array $annotations): ?Rfc1\View
+    private function getView(array $annotations): ?Dto\View
     {
-        $views = array_filter($annotations, function($annotation) { return $annotation instanceof Rfc1\View; });
+        $views = array_filter($annotations, function($annotation) { return $annotation instanceof Dto\View; });
         if (!count($views)) {
             return null;
         }
