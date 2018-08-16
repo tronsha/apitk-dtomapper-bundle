@@ -1,6 +1,6 @@
 {
   "name": "shopping/apitk-dtomapper-bundle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "symfony-bundle",
   "description": "This bundle provides mapping helpers to map rest action to DTOs and render them serialized.",
   "authors": [
