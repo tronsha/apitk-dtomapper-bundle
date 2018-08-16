@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90342a35fb82b5942e5f2dfdc0b06db6",
+    "content-hash": "04c5a5441937caf30c01508bcc8f9858",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1499,16 +1499,16 @@
         },
         {
             "name": "shopping/apitk-common-bundle",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CHECK24/apitk-common-bundle.git",
-                "reference": "57cc349102325984544def3618d7d9bd1b23a649"
+                "reference": "5ea43b4bc7439dc6166e6f42b7bd74073f0ebc0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CHECK24/apitk-common-bundle/zipball/57cc349102325984544def3618d7d9bd1b23a649",
-                "reference": "57cc349102325984544def3618d7d9bd1b23a649",
+                "url": "https://api.github.com/repos/CHECK24/apitk-common-bundle/zipball/5ea43b4bc7439dc6166e6f42b7bd74073f0ebc0a",
+                "reference": "5ea43b4bc7439dc6166e6f42b7bd74073f0ebc0a",
                 "shasum": ""
             },
             "require": {
@@ -1555,10 +1555,10 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/CHECK24/apitk-common-bundle/tree/develop",
+                "source": "https://github.com/CHECK24/apitk-common-bundle/tree/1.0.0",
                 "issues": "https://github.com/CHECK24/apitk-common-bundle/issues"
             },
-            "time": "2018-08-16T06:57:02+00:00"
+            "time": "2018-08-16T12:05:32+00:00"
         },
         {
             "name": "symfony/cache",
@@ -3018,9 +3018,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "shopping/apitk-common-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
