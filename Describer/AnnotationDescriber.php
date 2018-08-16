@@ -7,6 +7,7 @@ use Doctrine\Common\Annotations\Reader;
 use EXSyst\Component\Swagger\Operation;
 use EXSyst\Component\Swagger\Path;
 use EXSyst\Component\Swagger\Response;
+use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareInterface;
 use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
 use Nelmio\ApiDocBundle\Model\Model;
 use Shopping\ApiTKCommonBundle\Describer\AbstractDescriber;
@@ -28,7 +29,7 @@ use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
  *
  * @package Shopping\ApiTKDtoMapperBundle\Describer
  */
-class AnnotationDescriber extends AbstractDescriber
+class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwareInterface
 {
     use ModelRegistryAwareTrait;
 
