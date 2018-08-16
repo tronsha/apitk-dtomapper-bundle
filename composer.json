@@ -26,6 +26,13 @@
     "doctrine/annotations": "^1.6",
     "doctrine/orm": "^2.6",
     "nelmio/api-doc-bundle": "^3.2",
+    "shopping/apitk-common-bundle": "dev-master",
     "friendsofsymfony/rest-bundle": "^2.3"
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:CHECK24/apitk-common-bundle.git"
+    }
+  ]
 }

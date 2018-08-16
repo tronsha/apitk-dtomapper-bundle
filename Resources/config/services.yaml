@@ -4,24 +4,29 @@ services:
 
     Shopping\ApiTKDtoMapperBundle\EventListener\ControllerListener:
         tags:
-            - {name: kernel.event_listener, event: kernel.controller}
+            - { name: kernel.event_listener, event: kernel.controller }
 
     Shopping\ApiTKDtoMapperBundle\EventListener\SwaggerListener:
         tags:
-            - {name: kernel.event_listener, event: kernel.controller}
+            - { name: kernel.event_listener, event: kernel.controller }
 
     Shopping\ApiTKDtoMapperBundle\EventListener\MapperListener:
-        autowire: true
+        arguments:
+            - '@Shopping\ApiTKDtoMapperBundle\EventListener\ControllerListener'
+            - '@annotations.reader'
+            - '@Shopping\ApiTKDtoMapperBundle\Service\ArrayHelper'
+            - '@service_container'
         tags:
-            - {name: kernel.event_listener, event: kernel.view, priority: 1000}
+            - { name: kernel.event_listener, event: kernel.view, priority: 1000 }
 
     Shopping\ApiTKDtoMapperBundle\Handler\PhpViewHandler: ~
 
     Shopping\ApiTKDtoMapperBundle\Describer\AnnotationDescriber:
-        autowire: true
         public: false
         arguments:
             - '@nelmio_api_doc.routes.default'
-            - '@nelmio_api_doc.controller_reflector'
+            - '@Shopping\ApiTKCommonBundle\Util\ControllerReflector'
+            - '@annotations.reader'
+            - '@Shopping\ApiTKDtoMapperBundle\Service\StringHelper'
         tags:
-            - {name: 'nelmio_api_doc.route_describer', priority: -2000 }
+            - { name: 'nelmio_api_doc.route_describer', priority: -2000 }
