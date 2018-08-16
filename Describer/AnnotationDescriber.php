@@ -13,7 +13,7 @@ use Shopping\ApiTKCommonBundle\Describer\AbstractDescriber;
 use Shopping\ApiTKDtoMapperBundle\Service\StringHelper;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
-use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
+use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 
 /**
  * Class AnnotationDescriber
@@ -99,12 +99,13 @@ class AnnotationDescriber extends AbstractDescriber
      * Returns the view annotation.
      *
      * @param Annotation[] $annotations
-     * @return null|Dto\View
+     *
+     * @return null|DtoMapper\View
      */
-    private function getView(array $annotations): ?Dto\View
+    private function getView(array $annotations): ?DtoMapper\View
     {
         $views = array_filter($annotations, function ($annotation) {
-            return $annotation instanceof Dto\View;
+            return $annotation instanceof DtoMapper\View;
         });
         if (!count($views)) {
             return null;
