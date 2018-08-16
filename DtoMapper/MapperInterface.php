@@ -1,10 +1,10 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\DtoMapper;
+namespace Shopping\ApiTKDtoMapperBundle\DtoMapper;
 
 /**
  * Interface MapperInterface
- * @package Shopping\ApiDtoMapperBundle\DtoMapper
+ * @package Shopping\ApiTKDtoMapperBundle\DtoMapper
  */
 interface MapperInterface
 {

@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUnusedParameterInspection */
 
-namespace Shopping\ApiDtoMapperBundle\Handler;
+namespace Shopping\ApiTKDtoMapperBundle\Handler;
 
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * ViewHandler for the fast serialize() responses. (Map "dto" type to the wished mime type in your fos_rest.yaml)
  *
- * @package Shopping\ApiDtoMapperBundle\Handler
+ * @package Shopping\ApiTKDtoMapperBundle\Handler
  */
 class PhpViewHandler
 {

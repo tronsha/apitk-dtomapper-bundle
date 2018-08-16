@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\EventListener;
+namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  *
  * Remember, what controller got called in this request, so we can get the corresponding annotation in the ResponseView.
  *
- * @package Shopping\ApiDtoMapperBundle\EventListener
+ * @package Shopping\ApiTKDtoMapperBundle\EventListener
  */
 class ControllerListener
 {

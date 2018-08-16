@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Shopping\ApiDtoMapperBundle\Service;
+namespace Shopping\ApiTKDtoMapperBundle\Service;
 
 /**
  * Class StringHelper
- * @package Shopping\ApiDtoMapperBundle\Service
+ * @package Shopping\ApiTKDtoMapperBundle\Service
  */
 class StringHelper
 {

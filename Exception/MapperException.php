@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\Exception;
+namespace Shopping\ApiTKDtoMapperBundle\Exception;
 
 class MapperException extends \Exception
 {

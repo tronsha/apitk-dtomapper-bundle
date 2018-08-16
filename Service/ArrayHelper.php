@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\Service;
+namespace Shopping\ApiTKDtoMapperBundle\Service;
 
 /**
  * Class ArrayHelper

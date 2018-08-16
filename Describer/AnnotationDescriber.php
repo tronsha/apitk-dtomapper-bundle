@@ -1,7 +1,6 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\Describer;
-
+namespace Shopping\ApiTKDtoMapperBundle\Describer;
 
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Reader;
@@ -13,10 +12,10 @@ use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareInterface;
 use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
 use Nelmio\ApiDocBundle\Model\Model;
 use Nelmio\ApiDocBundle\Util\ControllerReflector;
-use Shopping\ApiDtoMapperBundle\Service\StringHelper;
+use Shopping\ApiTKDtoMapperBundle\Service\StringHelper;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
-use Shopping\ApiDtoMapperBundle\Annotation AS Dto;
+use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
 
 /**
  * Class AnnotationDescriber
@@ -29,7 +28,7 @@ use Shopping\ApiDtoMapperBundle\Annotation AS Dto;
  * * Corresponding dtoMapper has a return typehint
  * * Controller action has a return-annotation, which states the return of an array or not (f.e. * @ return Foobar[])
  *
- * @package Shopping\ApiDtoMapperBundle\Describer
+ * @package Shopping\ApiTKDtoMapperBundle\Describer
  */
 class AnnotationDescriber implements DescriberInterface, ModelRegistryAwareInterface
 {
@@ -162,7 +161,9 @@ class AnnotationDescriber implements DescriberInterface, ModelRegistryAwareInter
      */
     private function getView(array $annotations): ?Dto\View
     {
-        $views = array_filter($annotations, function($annotation) { return $annotation instanceof Dto\View; });
+        $views = array_filter($annotations, function ($annotation) {
+            return $annotation instanceof Dto\View;
+        });
         if (!count($views)) {
             return null;
         }

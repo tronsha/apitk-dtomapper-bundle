@@ -1,16 +1,16 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\EventListener;
+namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
-use Shopping\ApiDtoMapperBundle\DtoMapper\MapperInterface;
-use Shopping\ApiDtoMapperBundle\Exception\MapperException;
-use Shopping\ApiDtoMapperBundle\Service\ArrayHelper;
+use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
+use Shopping\ApiTKDtoMapperBundle\Exception\MapperException;
+use Shopping\ApiTKDtoMapperBundle\Service\ArrayHelper;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
-use Shopping\ApiDtoMapperBundle\Annotation as Dto;
+use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
 
 /**
  * Class MapperListener
@@ -18,7 +18,7 @@ use Shopping\ApiDtoMapperBundle\Annotation as Dto;
  * Applies the Dto\View dtoMapper to the by the controller action returned data, so a DTO (or array of DTOs) goes to
  * the response.
  *
- * @package Shopping\ApiDtoMapperBundle\EventListener
+ * @package Shopping\ApiTKDtoMapperBundle\EventListener
  */
 class MapperListener
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\Annotation;
+namespace Shopping\ApiTKDtoMapperBundle\Annotation;
 
 use \FOS\RestBundle\Controller\Annotations as Rest;
 

@@ -1,23 +1,23 @@
 services:
-    Shopping\ApiDtoMapperBundle\Service\ArrayHelper: ~
-    Shopping\ApiDtoMapperBundle\Service\StringHelper: ~
+    Shopping\ApiTKDtoMapperBundle\Service\ArrayHelper: ~
+    Shopping\ApiTKDtoMapperBundle\Service\StringHelper: ~
 
-    Shopping\ApiDtoMapperBundle\EventListener\ControllerListener:
+    Shopping\ApiTKDtoMapperBundle\EventListener\ControllerListener:
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
 
-    Shopping\ApiDtoMapperBundle\EventListener\SwaggerListener:
+    Shopping\ApiTKDtoMapperBundle\EventListener\SwaggerListener:
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
 
-    Shopping\ApiDtoMapperBundle\EventListener\MapperListener:
+    Shopping\ApiTKDtoMapperBundle\EventListener\MapperListener:
         autowire: true
         tags:
             - {name: kernel.event_listener, event: kernel.view, priority: 1000}
 
-    Shopping\ApiDtoMapperBundle\Handler\PhpViewHandler: ~
+    Shopping\ApiTKDtoMapperBundle\Handler\PhpViewHandler: ~
 
-    Shopping\ApiDtoMapperBundle\Describer\AnnotationDescriber:
+    Shopping\ApiTKDtoMapperBundle\Describer\AnnotationDescriber:
         autowire: true
         public: false
         arguments:

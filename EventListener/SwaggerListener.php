@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopping\ApiDtoMapperBundle\EventListener;
+namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
 use Nelmio\ApiDocBundle\Controller\SwaggerUiController;
 use Swagger\Annotations\Get;
@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
  * Class ControllerListener
- * @package Shopping\ApiDtoMapperBundle\EventListener
+ * @package Shopping\ApiTKDtoMapperBundle\EventListener
  *
  * Because we auto generate responses, we have to tell Swagger that no response annotation is required. (Kinda hacky :/)
  */
