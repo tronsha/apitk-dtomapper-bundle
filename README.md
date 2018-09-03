@@ -4,20 +4,9 @@
 This bundle adds versioned DTO support for RESTful API's.
 
 ## Installation
-Add this repository to your `composer.json` until it is available at packagist:
+Install the package via composer:
 ```
-{
-    "repositories": [{
-            "type": "vcs",
-            "url": "git@github.com:CHECK24/apitk-dtomapper-bundle.git"
-        }
-    ]
-}
-```
-
-After that, install the package via composer:
-```
-composer install shopping/apitk-dtomapper-bundle:dev-master
+composer install check24/apitk-dtomapper-bundle
 ```
 
 ## Usage
