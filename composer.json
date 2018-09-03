@@ -1,6 +1,7 @@
 {
   "name": "check24/apitk-dtomapper-bundle",
-  "version": "1.0.2",
+  "version": "1.0.3",
+  "license": "MIT",
   "type": "symfony-bundle",
   "description": "This bundle provides mapping helpers to map rest action to DTOs and render them serialized.",
   "authors": [
