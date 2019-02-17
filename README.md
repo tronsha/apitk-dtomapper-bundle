@@ -6,7 +6,7 @@ This bundle adds versioned DTO support for RESTful API's.
 ## Installation
 Install the package via composer:
 ```
-composer install check24/apitk-dtomapper-bundle
+composer require check24/apitk-dtomapper-bundle
 ```
 
 ## Usage
