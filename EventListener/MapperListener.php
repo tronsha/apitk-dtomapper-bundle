@@ -91,13 +91,19 @@ class MapperListener
     }
 
     /**
-     * @param callable $controller
-     * @return null|Dto\View
+     * @param mixed $controller
+     * @return Dto\View|null
+     * @throws \ReflectionException
      */
-    private function getViewAnnotationByController(callable $controller): ?Dto\View
+    private function getViewAnnotationByController($controller): ?Dto\View
     {
         /** @var Controller $controllerObject */
-        list($controllerObject, $methodName) = $controller;
+        if (is_array($controller)) {
+            list($controllerObject, $methodName) = $controller;
+        } else {
+            $controllerObject = $controller;
+            $methodName = '__invoke';
+        }
 
         $controllerReflectionObject = new \ReflectionObject($controllerObject);
         $reflectionMethod = $controllerReflectionObject->getMethod($methodName);
