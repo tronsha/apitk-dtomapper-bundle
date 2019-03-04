@@ -19,7 +19,7 @@ class ControllerListener
     private $masterRequest = true;
 
     /**
-     * @var callable|null
+     * @var callable|object|null
      */
     private $calledController = null;
 
@@ -31,9 +31,7 @@ class ControllerListener
         }
         $this->masterRequest = false;
 
-        if (is_array($event->getController())) {
-            $this->calledController = $event->getController();
-        }
+        $this->calledController = $event->getController();
     }
 
     public function getCalledController(): ?callable
