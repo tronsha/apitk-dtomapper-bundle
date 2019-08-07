@@ -28,7 +28,7 @@ class PhpViewHandler
         $data = $view->getData();
 
         // Use simplified exception because serialization of closures inside the real exception is not allowed and crashes
-        if ($view->getTemplate() === 'raw_exception') {
+        if ($view->getTemplateVar() === 'raw_exception') {
             $data = $view->getTemplateData()['exception'];
         }
 
