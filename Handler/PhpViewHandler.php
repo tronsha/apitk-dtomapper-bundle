@@ -25,6 +25,13 @@ class PhpViewHandler
      */
     public function createResponse(ViewHandler $handler, View $view, Request $request, $format)
     {
-        return new Response(serialize($view->getData()), $view->getStatusCode() ?? 200,  $view->getHeaders());
+        $data = $view->getData();
+
+        // Use simplified exception because serialization of closures inside the real exception is not allowed and crashes
+        if ($view->getTemplateVar() === 'raw_exception') {
+            $data = $view->getTemplateData()['exception'];
+        }
+
+        return new Response(serialize($data), $view->getStatusCode() ?? 200,  $view->getHeaders());
     }
 }
