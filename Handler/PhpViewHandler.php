@@ -25,6 +25,6 @@ class PhpViewHandler
      */
     public function createResponse(ViewHandler $handler, View $view, Request $request, $format)
     {
-        return new Response(serialize($view->getData()), $view->getStatusCode() ?? 200);
+        return new Response(serialize($view->getData()), $view->getStatusCode() ?? 200,  $view->getHeaders());
     }
 }
