@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "afe8ad55ee5956a6051b5bf05f6a98a6",
+    "content-hash": "a249b54aab4a12e12690453fec9bbd62",
     "packages": [
         {
             "name": "check24/apitk-common-bundle",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/CHECK24/apitk-common-bundle.git",
-                "reference": "82cd1c240c12309943b6d6074e1ba7b7c2841a6d"
+                "url": "https://github.com/byWulf/apitk-common-bundle.git",
+                "reference": "cdf6f5fc57cd0ef5cee1fc763e8df34b9d29299d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CHECK24/apitk-common-bundle/zipball/82cd1c240c12309943b6d6074e1ba7b7c2841a6d",
-                "reference": "82cd1c240c12309943b6d6074e1ba7b7c2841a6d",
+                "url": "https://api.github.com/repos/byWulf/apitk-common-bundle/zipball/cdf6f5fc57cd0ef5cee1fc763e8df34b9d29299d",
+                "reference": "cdf6f5fc57cd0ef5cee1fc763e8df34b9d29299d",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                     "email": "alexdo@alexdo.de"
                 }
             ],
-            "time": "2018-09-03T07:12:18+00:00"
+            "time": "2018-09-03T07:45:42+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -687,12 +687,12 @@
             "version": "v2.6.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "shasum": ""
             },
