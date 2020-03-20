@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
+use Exception;
+use ReflectionException;
+use ReflectionObject;
 use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
 use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 use Shopping\ApiTKDtoMapperBundle\Exception\MapperException;
 use Shopping\ApiTKDtoMapperBundle\Service\ArrayHelper;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 /**
  * Class MapperListener.
@@ -61,13 +66,14 @@ class MapperListener
     }
 
     /**
-     * @param GetResponseForControllerResultEvent $event
+     * @param ViewEvent $event
      *
      * @throws MapperException
+     * @throws ReflectionException
      */
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView(ViewEvent $event): void
     {
-        //Only transform on original action
+        // only transform on original action
         if (!$this->masterRequest) {
             return;
         }
@@ -84,8 +90,8 @@ class MapperListener
 
         try {
             /** @var MapperInterface $mapper */
-            $mapper = $this->container->get($view->getDtoMapper());
-        } catch (\Exception $e) {
+            $mapper = $this->container->get((string) $view->getDtoMapper());
+        } catch (Exception $e) {
             throw new MapperException(sprintf('Mapper "%s" could not be used. %s', $view->getDtoMapper(), $e->getMessage()), 500, $e);
         }
 
@@ -97,13 +103,14 @@ class MapperListener
     /**
      * @param mixed $controller
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
+     * @return Dto\View|null
      * @return Dto\View|null
      */
     private function getViewAnnotationByController($controller): ?Dto\View
     {
-        /** @var Controller $controllerObject */
+        /** @var AbstractController $controllerObject */
         if (is_array($controller)) {
             list($controllerObject, $methodName) = $controller;
         } else {
@@ -111,7 +118,7 @@ class MapperListener
             $methodName = '__invoke';
         }
 
-        $controllerReflectionObject = new \ReflectionObject($controllerObject);
+        $controllerReflectionObject = new ReflectionObject($controllerObject);
         $reflectionMethod = $controllerReflectionObject->getMethod($methodName);
 
         $annotations = $this->reader->getMethodAnnotations($reflectionMethod);
@@ -125,12 +132,12 @@ class MapperListener
     }
 
     /**
-     * @param object|array    $data
+     * @param iterable        $data
      * @param MapperInterface $mapper
      *
      * @return object|array
      */
-    private function mapData($data, MapperInterface $mapper)
+    private function mapData(iterable $data, MapperInterface $mapper)
     {
         if ($this->arrayHelper->isNumeric($data)) {
             $mappedData = [];

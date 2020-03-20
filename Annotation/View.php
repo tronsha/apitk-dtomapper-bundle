@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKDtoMapperBundle\Annotation;
 
 use FOS\RestBundle\Controller\Annotations as Rest;

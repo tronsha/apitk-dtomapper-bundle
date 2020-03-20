@@ -22,11 +22,11 @@ class PhpViewHandler
      * @param ViewHandler $handler
      * @param View        $view
      * @param Request     $request
-     * @param $format
+     * @param string|null $format
      *
      * @return Response
      */
-    public function createResponse(ViewHandler $handler, View $view, Request $request, $format)
+    public function createResponse(ViewHandler $handler, View $view, Request $request, $format): Response
     {
         $data = $view->getData();
 

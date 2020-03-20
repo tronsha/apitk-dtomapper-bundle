@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKDtoMapperBundle\Service;
+
+use Traversable;
 
 /**
  * Class ArrayHelper.
@@ -12,13 +16,15 @@ class ArrayHelper
     /**
      * Returns if the array has only numeric keys.
      *
-     * @param array $array
+     * @param iterable $array
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
-    public function isNumeric($array): bool
+    public function isNumeric(iterable $array): bool
     {
-        if (!is_array($array) && !$array instanceof \Traversable) {
+        if (!$array instanceof Traversable) {
             return false;
         }
         foreach ($array as $key => $value) {

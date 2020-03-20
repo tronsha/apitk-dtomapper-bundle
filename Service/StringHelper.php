@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKDtoMapperBundle\Service;
 
+use ReflectionClass;
+use ReflectionException;
+
 /**
  * Class StringHelper.
  *
@@ -21,8 +24,8 @@ class StringHelper
     public function getShortTypeByType(string $type): ?string
     {
         try {
-            return (new \ReflectionClass($type))->getShortName();
-        } catch (\ReflectionException $e) {
+            return (new ReflectionClass($type))->getShortName();
+        } catch (ReflectionException $e) {
             return null;
         }
     }

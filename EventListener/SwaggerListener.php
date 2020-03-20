@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
 use Nelmio\ApiDocBundle\Controller\SwaggerUiController;
+use ReflectionClass;
+use ReflectionException;
 use Swagger\Annotations\Get;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 /**
  * Class ControllerListener.
@@ -15,13 +19,17 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  */
 class SwaggerListener
 {
-    public function onKernelController(FilterControllerEvent $event)
+    /**
+     * @param ControllerEvent $event
+     */
+    public function onKernelController(ControllerEvent $event): void
     {
         if ($event->getController() instanceof SwaggerUiController) {
             try {
-                $reflectionClass = new \ReflectionClass(Get::class);
+                $reflectionClass = new ReflectionClass(Get::class);
                 $reflectionClass->setStaticPropertyValue('_required', []);
-            } catch (\ReflectionException $e) {
+            } catch (ReflectionException $e) {
+                // suppress
             }
         }
     }

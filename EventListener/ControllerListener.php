@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 /**
  * Class ControllerListener.
@@ -19,13 +21,16 @@ class ControllerListener
     private $masterRequest = true;
 
     /**
-     * @var callable|object|null
+     * @var callable|null
      */
     private $calledController;
 
-    public function onKernelController(FilterControllerEvent $event)
+    /**
+     * @param ControllerEvent $event
+     */
+    public function onKernelController(ControllerEvent $event): void
     {
-        //Only transform on original action
+        // only transform on original action
         if (!$this->masterRequest) {
             return;
         }
