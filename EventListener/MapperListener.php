@@ -2,18 +2,17 @@
 
 namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
+use Doctrine\Common\Annotations\Reader;
+use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
 use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 use Shopping\ApiTKDtoMapperBundle\Exception\MapperException;
 use Shopping\ApiTKDtoMapperBundle\Service\ArrayHelper;
-use Doctrine\Common\Annotations\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
-use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
-
 /**
- * Class MapperListener
+ * Class MapperListener.
  *
  * Applies the Dto\View dtoMapper to the by the controller action returned data, so a DTO (or array of DTOs) goes to
  * the response.
@@ -26,18 +25,22 @@ class MapperListener
      * @var bool
      */
     private $masterRequest = true;
+
     /**
      * @var ControllerListener
      */
     private $controllerListener;
+
     /**
      * @var Reader
      */
     private $reader;
+
     /**
      * @var ArrayHelper
      */
     private $arrayHelper;
+
     /**
      * @var ContainerInterface
      */
@@ -45,8 +48,8 @@ class MapperListener
 
     /**
      * @param ControllerListener $controllerListener
-     * @param Reader $reader
-     * @param ArrayHelper $arrayHelper
+     * @param Reader             $reader
+     * @param ArrayHelper        $arrayHelper
      * @param ContainerInterface $container
      */
     public function __construct(ControllerListener $controllerListener, Reader $reader, ArrayHelper $arrayHelper, ContainerInterface $container)
@@ -59,6 +62,7 @@ class MapperListener
 
     /**
      * @param GetResponseForControllerResultEvent $event
+     *
      * @throws MapperException
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
@@ -92,8 +96,10 @@ class MapperListener
 
     /**
      * @param mixed $controller
-     * @return Dto\View|null
+     *
      * @throws \ReflectionException
+     *
+     * @return Dto\View|null
      */
     private function getViewAnnotationByController($controller): ?Dto\View
     {
@@ -119,8 +125,9 @@ class MapperListener
     }
 
     /**
-     * @param object|array $data
+     * @param object|array    $data
      * @param MapperInterface $mapper
+     *
      * @return object|array
      */
     private function mapData($data, MapperInterface $mapper)

@@ -11,13 +11,13 @@ use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareInterface;
 use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
 use Nelmio\ApiDocBundle\Model\Model;
 use Shopping\ApiTKCommonBundle\Describer\AbstractDescriber;
+use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 use Shopping\ApiTKDtoMapperBundle\Service\StringHelper;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
-use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 
 /**
- * Class AnnotationDescriber
+ * Class AnnotationDescriber.
  *
  * Auto generate 200-responses by the annotated dtoMapper.
  *
@@ -25,6 +25,7 @@ use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
  * * No Response(200) annotation given
  * * Dto\View annotation with dtoMapper given
  * * Corresponding dtoMapper has a return typehint
+ *
  * * Controller action has a return-annotation, which states the return of an array or not (f.e. * @ return Foobar[])
  *
  * @package Shopping\ApiTKDtoMapperBundle\Describer
@@ -34,8 +35,8 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
     use ModelRegistryAwareTrait;
 
     /**
-      * @var StringHelper
-      */
+     * @var StringHelper
+     */
     private $stringHelper;
 
     /**
@@ -55,7 +56,6 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
         parent::__construct($routeCollection, $controllerReflector, $reader);
         $this->stringHelper = $stringHelper;
     }
-
 
     /**
      * @param Operation         $operation
@@ -101,7 +101,7 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
      *
      * @param Annotation[] $annotations
      *
-     * @return null|DtoMapper\View
+     * @return DtoMapper\View|null
      */
     private function getView(array $annotations): ?DtoMapper\View
     {
@@ -119,7 +119,8 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
      * Returns the Dto class name the Mapper will return.
      *
      * @param string $mapper
-     * @return null|string
+     *
+     * @return string|null
      */
     private function getDtoByMapper(string $mapper): ?string
     {
@@ -135,9 +136,10 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
     /**
      * Returns the response object for swagger.
      *
-     * @param bool $isArray
+     * @param bool   $isArray
      * @param string $shortType
      * @param string $reference
+     *
      * @return Response
      */
     private function getResponse(bool $isArray, string $shortType, string $reference): Response
@@ -168,6 +170,7 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
      * Returns true, if the methods returns an array (by the return annotation).
      *
      * @param \ReflectionMethod $method
+     *
      * @return bool
      */
     private function willReturnArray(\ReflectionMethod $method): bool

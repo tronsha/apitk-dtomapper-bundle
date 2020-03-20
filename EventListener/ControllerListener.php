@@ -5,7 +5,7 @@ namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
- * Class ControllerListener
+ * Class ControllerListener.
  *
  * Remember, what controller got called in this request, so we can get the corresponding annotation in the ResponseView.
  *
@@ -21,7 +21,7 @@ class ControllerListener
     /**
      * @var callable|object|null
      */
-    private $calledController = null;
+    private $calledController;
 
     public function onKernelController(FilterControllerEvent $event)
     {
