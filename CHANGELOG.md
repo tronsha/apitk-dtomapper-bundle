@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 
+## [2.0.1] - 2020-03-23
+### Fixed
+* exception when mapping arrays of data
+
 ## [2.0.0] - 2020-03-20
 ### Added
 * Support for Symfony 5.0
