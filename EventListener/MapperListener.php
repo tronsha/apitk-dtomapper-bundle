@@ -132,14 +132,14 @@ class MapperListener
     }
 
     /**
-     * @param iterable        $data
+     * @param iterable|object $data
      * @param MapperInterface $mapper
      *
      * @return object|array
      */
-    private function mapData(iterable $data, MapperInterface $mapper)
+    private function mapData($data, MapperInterface $mapper)
     {
-        if ($this->arrayHelper->isNumeric($data)) {
+        if (is_array($data) && $this->arrayHelper->isNumeric($data)) {
             $mappedData = [];
             foreach ($data as $entry) {
                 $mappedData[] = $mapper->map($entry);
