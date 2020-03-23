@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKDtoMapperBundle\Describer;
 
 use Doctrine\Common\Annotations\Annotation;
@@ -10,14 +12,17 @@ use EXSyst\Component\Swagger\Response;
 use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareInterface;
 use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
 use Nelmio\ApiDocBundle\Model\Model;
+use ReflectionException;
+use ReflectionMethod;
 use Shopping\ApiTKCommonBundle\Describer\AbstractDescriber;
+use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
+use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 use Shopping\ApiTKDtoMapperBundle\Service\StringHelper;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\RouteCollection;
-use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 
 /**
- * Class AnnotationDescriber
+ * Class AnnotationDescriber.
  *
  * Auto generate 200-responses by the annotated dtoMapper.
  *
@@ -25,6 +30,7 @@ use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
  * * No Response(200) annotation given
  * * Dto\View annotation with dtoMapper given
  * * Corresponding dtoMapper has a return typehint
+ *
  * * Controller action has a return-annotation, which states the return of an array or not (f.e. * @ return Foobar[])
  *
  * @package Shopping\ApiTKDtoMapperBundle\Describer
@@ -34,21 +40,21 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
     use ModelRegistryAwareTrait;
 
     /**
-      * @var StringHelper
-      */
+     * @var StringHelper
+     */
     private $stringHelper;
 
     /**
      * AnnotationDescriber constructor.
      *
-     * @param RouteCollection                                      $routeCollection
-     * @param \Shopping\ApiTKCommonBundle\Util\ControllerReflector $controllerReflector
-     * @param Reader                                               $reader
-     * @param StringHelper                                         $stringHelper
+     * @param RouteCollection     $routeCollection
+     * @param ControllerReflector $controllerReflector
+     * @param Reader              $reader
+     * @param StringHelper        $stringHelper
      */
     public function __construct(
         RouteCollection $routeCollection,
-        \Shopping\ApiTKCommonBundle\Util\ControllerReflector $controllerReflector,
+        ControllerReflector $controllerReflector,
         Reader $reader,
         StringHelper $stringHelper
     ) {
@@ -56,16 +62,15 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
         $this->stringHelper = $stringHelper;
     }
 
-
     /**
-     * @param Operation         $operation
-     * @param \ReflectionMethod $classMethod
-     * @param Path              $path
-     * @param string            $method
+     * @param Operation        $operation
+     * @param ReflectionMethod $classMethod
+     * @param Path             $path
+     * @param string           $method
      */
     protected function handleOperation(
         Operation $operation,
-        \ReflectionMethod $classMethod,
+        ReflectionMethod $classMethod,
         Path $path,
         string $method
     ): void {
@@ -79,7 +84,7 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
             return;
         }
 
-        $type = $this->getDtoByMapper($view->getDtoMapper());
+        $type = $this->getDtoByMapper((string) $view->getDtoMapper());
         if (!$type) {
             return;
         }
@@ -101,7 +106,7 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
      *
      * @param Annotation[] $annotations
      *
-     * @return null|DtoMapper\View
+     * @return DtoMapper\View|null
      */
     private function getView(array $annotations): ?DtoMapper\View
     {
@@ -119,15 +124,17 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
      * Returns the Dto class name the Mapper will return.
      *
      * @param string $mapper
-     * @return null|string
+     *
+     * @return string|null
      */
     private function getDtoByMapper(string $mapper): ?string
     {
         try {
-            $viewReflectionMethod = new \ReflectionMethod($mapper, 'map');
+            $viewReflectionMethod = new ReflectionMethod($mapper, 'map');
+            $returnType = $viewReflectionMethod->getReturnType();
 
-            return $viewReflectionMethod->getReturnType()->getName();
-        } catch (\ReflectionException $e) {
+            return $returnType === null ? null : $returnType->getName();
+        } catch (ReflectionException $e) {
             return null;
         }
     }
@@ -135,9 +142,10 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
     /**
      * Returns the response object for swagger.
      *
-     * @param bool $isArray
+     * @param bool   $isArray
      * @param string $shortType
      * @param string $reference
+     *
      * @return Response
      */
     private function getResponse(bool $isArray, string $shortType, string $reference): Response
@@ -167,11 +175,12 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
     /**
      * Returns true, if the methods returns an array (by the return annotation).
      *
-     * @param \ReflectionMethod $method
+     * @param ReflectionMethod $method
+     *
      * @return bool
      */
-    private function willReturnArray(\ReflectionMethod $method): bool
+    private function willReturnArray(ReflectionMethod $method): bool
     {
-        return (bool) preg_match("/@return[ \t]+([^ \t\n\r\\[\\]]+\\[\\])/", $method->getDocComment());
+        return (bool) preg_match("/@return[ \t]+([^ \t\n\r\\[\\]]+\\[\\])/", (string) $method->getDocComment());
     }
 }

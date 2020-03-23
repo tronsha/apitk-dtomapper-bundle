@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUnusedParameterInspection */
+<?php
+
+/** @noinspection PhpUnusedParameterInspection */
 
 namespace Shopping\ApiTKDtoMapperBundle\Handler;
 
@@ -8,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PhpViewHandler
+ * Class PhpViewHandler.
  *
  * ViewHandler for the fast serialize() responses. (Map "dto" type to the wished mime type in your fos_rest.yaml)
  *
@@ -18,12 +20,13 @@ class PhpViewHandler
 {
     /**
      * @param ViewHandler $handler
-     * @param View $view
-     * @param Request $request
-     * @param $format
+     * @param View        $view
+     * @param Request     $request
+     * @param string|null $format
+     *
      * @return Response
      */
-    public function createResponse(ViewHandler $handler, View $view, Request $request, $format)
+    public function createResponse(ViewHandler $handler, View $view, Request $request, $format): Response
     {
         $data = $view->getData();
 
@@ -32,6 +35,6 @@ class PhpViewHandler
             $data = $view->getTemplateData()['exception'];
         }
 
-        return new Response(serialize($data), $view->getStatusCode() ?? 200,  $view->getHeaders());
+        return new Response(serialize($data), $view->getStatusCode() ?? 200, $view->getHeaders());
     }
 }

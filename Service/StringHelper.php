@@ -1,10 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Shopping\ApiTKDtoMapperBundle\Service;
 
+use ReflectionClass;
+use ReflectionException;
+
 /**
- * Class StringHelper
+ * Class StringHelper.
+ *
  * @package Shopping\ApiTKDtoMapperBundle\Service
  */
 class StringHelper
@@ -13,13 +18,14 @@ class StringHelper
      * Returns the unqualified (short) class name of a fully qualified class name.
      *
      * @param string $type
-     * @return null|string
+     *
+     * @return string|null
      */
     public function getShortTypeByType(string $type): ?string
     {
         try {
-            return (new \ReflectionClass($type))->getShortName();
-        } catch (\ReflectionException $e) {
+            return (new ReflectionClass($type))->getShortName();
+        } catch (ReflectionException $e) {
             return null;
         }
     }
@@ -28,11 +34,12 @@ class StringHelper
      * Adds an "a" or "an" to a word.
      *
      * @param string $string
+     *
      * @return string
      */
     public function addA(string $string): string
     {
-        if (in_array($string[0], ['a','e','i','o','u'])) {
+        if (in_array($string[0], ['a', 'e', 'i', 'o', 'u'])) {
             return 'an ' . $string;
         }
 
