@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 
+## [2.0.2] - 2020-03-26
+### Added
+* support for fos rest bundle 3.0
+
+### Fixed
+* fos rest bundle >= 2.8 deprecation
+
+### Removed
+* dependency on fos-rest templating integration
+
 ## [2.0.1] - 2020-03-23
 ### Fixed
 * exception when mapping arrays of data
