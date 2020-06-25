@@ -9,7 +9,7 @@
         "action": "php ./vendor/phpstan/phpstan/bin/phpstan analyse -l 7 -c phpstan.neon ."
       },
       {
-        "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd Annotation,DependencyInjection,Describer,DtoMapper,EventListener,Exception,Handler,Service,ShoppingApiTKDtoMapperBundle.php text ruleset.xml"
+        "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd Annotation,DependencyInjection,Describer,DtoMapper,EventListener,Exception,Handler,Service,Serializer,ShoppingApiTKDtoMapperBundle.php text ruleset.xml"
       }
     ]
   }
