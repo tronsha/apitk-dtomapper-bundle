@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 -
 
+## [3.0.0] - 2020-06-25
+### Fixed
+* exception serialization handling in fos rest bundle 3.0
+
+### Removed
+* __support for PHP < 7.2 (7.1 is end of life)__ 
+* __support for fos rest bundle 2.x__
+* __support for symfony 4.3 (end of life)__
 
 ## [2.0.2] - 2020-03-26
 ### Added

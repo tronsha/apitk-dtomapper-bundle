@@ -21,6 +21,10 @@ services:
 
     Shopping\ApiTKDtoMapperBundle\Handler\PhpViewHandler: ~
 
+    Shopping\ApiTKDtoMapperBundle\Serializer\DtoEncoder:
+        tags:
+            - { name: serializer.encoder }
+
     Shopping\ApiTKDtoMapperBundle\Describer\AnnotationDescriber:
         public: false
         arguments:

@@ -90,6 +90,8 @@ fos_rest:
             dto: ['application/vnd.dto'] # You can specify whatever mime type you want, just map it to "dto".
     service:
         view_handler: app.view_handler
+    exception:
+        serializer_error_renderer: true
 ```
 ```
 //services.yaml
@@ -105,3 +107,6 @@ services:
 
 When calling the API with the `Accept: application/vnd.dto` header, you will get the DTO as an 
 unserializable string.
+
+Exceptions will also be serialized. Stack Traces, filenames, line numbers and previous exceptions will be omitted
+when `kernel.debug` is set to `false` (= in productive environments) to avoid leaking potentially sensitive information.
