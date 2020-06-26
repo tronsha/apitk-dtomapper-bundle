@@ -24,7 +24,7 @@ class DtoEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function encode($data, /* string */$format, array $context = [])
+    public function encode($data, /* string */$format, array $context = []): string
     {
         $exception = $context['exception'] ?? null;
         $isDebug = $context['debug'] ?? false;
