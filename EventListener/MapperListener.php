@@ -11,6 +11,7 @@ use ReflectionObject;
 use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
 use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 use Shopping\ApiTKDtoMapperBundle\Exception\MapperException;
+use Shopping\ApiTKDtoMapperBundle\Exception\UnmappableException;
 use Shopping\ApiTKDtoMapperBundle\Service\ArrayHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -142,10 +143,18 @@ class MapperListener
         if (is_array($data) && $this->arrayHelper->isNumeric($data)) {
             $mappedData = [];
             foreach ($data as $entry) {
-                $mappedData[] = $mapper->map($entry);
+                try {
+                    $mappedData[] = $mapper->map($entry);
+                } catch (UnmappableException $exception) {
+                    // Data is not mappable and therefore we don't add it to the array
+                }
             }
         } else {
-            $mappedData = $mapper->map($data);
+            try {
+                $mappedData = $mapper->map($data);
+            } catch (UnmappableException $exception) {
+                $mappedData = null;
+            }
         }
 
         return $mappedData;

@@ -71,6 +71,8 @@ The bundle now automatically transform whatever you return in the action with th
 mapper into an DTO. When you return an array of data in your controller, the mapper will be called on 
 every single element. You don't have to worry about that.
 
+You can throw a `UnmappableException` if you want to skip some elements of the array.
+
 Also the bundle auto generates a swagger response with code 200 and the corresponding DTO scheme 
 (respectively an array of DTOs), so you don't have to add the redundant `@SWG\Response()`. For this 
 to work, just take care that your Mapper has a correct return typehint (f.e. 
