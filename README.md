@@ -5,7 +5,7 @@ This bundle adds versioned DTO support for RESTful API's.
 
 ## Installation
 Install the package via composer:
-```
+```bash
 composer require check24/apitk-dtomapper-bundle
 ```
 
@@ -13,7 +13,7 @@ composer require check24/apitk-dtomapper-bundle
 
 ### Setup
 Add this to your services.yaml so the bundle can automatically load and use the mapper services:
-```
+```yaml
 services:
     App\DtoMapper\:
         resource: '../src/DtoMapper'
@@ -24,7 +24,7 @@ services:
 
 Create a mapper class in the folder `src/DtoMapper` (or whichever you configured) which implements the
 `MapperInterface` and transforms incoming data into a single DTO:
-```
+```php
 use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 
 class UserV1Mapper implements MapperInterface
@@ -47,7 +47,7 @@ class UserV1Mapper implements MapperInterface
 
 In your controller replace the `@Rest\View()` annotation with the corresponding `@Dto\View()` mentioning
 the mapper to use:
-```
+```php
 use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 
 /**
@@ -84,7 +84,7 @@ this by your own `@SWG\Response()` annotation.
 If you wish to return the DTOs in a `serialize($dto)` manner instead of json, implement the available 
 dto view handler.
 
-```
+```yaml
 //fos_rest.yaml
 fos_rest:
     view:
@@ -95,7 +95,7 @@ fos_rest:
     exception:
         serializer_error_renderer: true
 ```
-```
+```yaml
 //services.yaml
 services:
     app.view_handler:
