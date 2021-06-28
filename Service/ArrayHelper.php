@@ -14,7 +14,7 @@ class ArrayHelper
     /**
      * Returns if the array has only numeric keys.
      *
-     * @param array $array
+     * @param array<mixed, mixed> $array
      *
      * @return bool
      *

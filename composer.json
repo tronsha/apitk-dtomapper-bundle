@@ -1,6 +1,6 @@
 {
   "name": "check24/apitk-dtomapper-bundle",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "license": "MIT",
   "type": "symfony-bundle",
   "description": "This bundle provides mapping helpers to map rest action to DTOs and render them serialized.",
@@ -22,14 +22,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/byWulf/apitk-common-bundle.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/byWulf/apitk-header-bundle.git"
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2 || ^8.0",
     "symfony/config": ">= 4.3 <6.0",
     "symfony/dependency-injection": ">= 4.3 <6.0",
     "symfony/http-kernel": ">= 4.3 <6.0",
@@ -37,7 +33,7 @@
     "symfony/framework-bundle": ">= 4.3 <6.0",
     "doctrine/annotations": "^1.6",
     "nelmio/api-doc-bundle": "^3.2",
-    "check24/apitk-common-bundle": "^2.0",
+    "check24/apitk-common-bundle": "dev-feature/php8.0 as 2.2",
     "friendsofsymfony/rest-bundle": "^3.0"
   },
   "require-dev": {
@@ -47,6 +43,6 @@
     "symfony/error-handler": ">= 4.4 <6.0",
     "friendsofphp/php-cs-fixer": "^2.13",
     "phpmd/phpmd": "^2.6",
-    "phpstan/phpstan": "^0.11.19"
+    "phpstan/phpstan": "^0.12"
   }
 }

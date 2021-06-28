@@ -23,8 +23,10 @@ class DtoEncoder implements EncoderInterface, DecoderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param array<mixed> $context
      */
-    public function encode($data, /* string */$format, array $context = []): string
+    public function encode($data, /* string */ $format, array $context = []): string
     {
         $exception = $context['exception'] ?? null;
         $isDebug = $context['debug'] ?? false;
@@ -38,8 +40,8 @@ class DtoEncoder implements EncoderInterface, DecoderInterface
             if (!$isDebug) {
                 $data
                     ->setFile('')
-                    ->setLine('')
-                    ->setTrace('', '', '')
+                    ->setLine(0)
+                    ->setTrace([], '', null)
                     ->setPrevious(FlattenException::create(new Exception('')));
             }
         }
@@ -49,8 +51,10 @@ class DtoEncoder implements EncoderInterface, DecoderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param array<mixed> $context
      */
-    public function decode(/* string */$data, /* string */$format, array $context = [])
+    public function decode(/* string */ $data, /* string */ $format, array $context = [])
     {
         return unserialize($data, ['allowed_classes' => $context['allowed_classes'] ?? true]);
     }
@@ -58,7 +62,7 @@ class DtoEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsEncoding(/* string */$format): bool
+    public function supportsEncoding(/* string */ $format): bool
     {
         return $format === self::FORMAT;
     }
@@ -66,7 +70,7 @@ class DtoEncoder implements EncoderInterface, DecoderInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsDecoding(/* string */$format): bool
+    public function supportsDecoding(/* string */ $format): bool
     {
         return $format === self::FORMAT;
     }

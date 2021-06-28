@@ -111,7 +111,6 @@ class MapperListener
      */
     private function getViewAnnotationByController($controller): ?Dto\View
     {
-        /** @var AbstractController $controllerObject */
         if (is_array($controller)) {
             list($controllerObject, $methodName) = $controller;
         } else {
@@ -119,6 +118,7 @@ class MapperListener
             $methodName = '__invoke';
         }
 
+        /** @var AbstractController $controllerObject */
         $controllerReflectionObject = new ReflectionObject($controllerObject);
         $reflectionMethod = $controllerReflectionObject->getMethod($methodName);
 
@@ -133,10 +133,10 @@ class MapperListener
     }
 
     /**
-     * @param iterable|object $data
+     * @param mixed           $data
      * @param MapperInterface $mapper
      *
-     * @return object|array
+     * @return mixed
      */
     private function mapData($data, MapperInterface $mapper)
     {
