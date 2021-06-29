@@ -17,7 +17,7 @@ class StringHelper
     /**
      * Returns the unqualified (short) class name of a fully qualified class name.
      *
-     * @param string $type
+     * @param class-string $type
      *
      * @return string|null
      */

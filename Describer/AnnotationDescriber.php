@@ -14,6 +14,7 @@ use Nelmio\ApiDocBundle\Describer\ModelRegistryAwareTrait;
 use Nelmio\ApiDocBundle\Model\Model;
 use ReflectionException;
 use ReflectionMethod;
+use ReflectionNamedType;
 use Shopping\ApiTKCommonBundle\Describer\AbstractDescriber;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
@@ -104,12 +105,13 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
     /**
      * Returns the view annotation.
      *
-     * @param Annotation[] $annotations
+     * @param object[] $annotations
      *
      * @return DtoMapper\View|null
      */
     private function getView(array $annotations): ?DtoMapper\View
     {
+        /** @var DtoMapper\View[] $views */
         $views = array_filter($annotations, function ($annotation) {
             return $annotation instanceof DtoMapper\View;
         });
@@ -125,7 +127,7 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
      *
      * @param string $mapper
      *
-     * @return string|null
+     * @return class-string|null
      */
     private function getDtoByMapper(string $mapper): ?string
     {
@@ -133,7 +135,14 @@ class AnnotationDescriber extends AbstractDescriber implements ModelRegistryAwar
             $viewReflectionMethod = new ReflectionMethod($mapper, 'map');
             $returnType = $viewReflectionMethod->getReturnType();
 
-            return $returnType === null ? null : $returnType->getName();
+            if (!$returnType instanceof ReflectionNamedType) {
+                return null;
+            }
+
+            /** @var class-string $dtoClass */
+            $dtoClass = $returnType->getName();
+
+            return $dtoClass;
         } catch (ReflectionException $e) {
             return null;
         }

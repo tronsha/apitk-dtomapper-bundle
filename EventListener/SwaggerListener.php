@@ -27,6 +27,8 @@ class SwaggerListener
         if ($event->getController() instanceof SwaggerUiController) {
             try {
                 $reflectionClass = new ReflectionClass(Get::class);
+
+                /** @phpstan-ignore-next-line */
                 $reflectionClass->setStaticPropertyValue('_required', []);
             } catch (ReflectionException $e) {
                 // suppress
