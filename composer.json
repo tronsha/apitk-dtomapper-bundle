@@ -32,7 +32,7 @@
     "symfony/framework-bundle": ">= 5.3 <6.0",
     "doctrine/annotations": "^1.6",
     "nelmio/api-doc-bundle": "^3.2",
-    "check24/apitk-common-bundle": "^2.2.0",
+    "check24/apitk-common-bundle": "^2.2 || ^3.0",
     "friendsofsymfony/rest-bundle": "^3.0"
   },
   "require-dev": {
