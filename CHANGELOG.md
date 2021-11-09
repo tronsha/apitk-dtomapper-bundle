@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [4.0.0] - 2021-11-09
+
+### Added
+- Support for snesio/framework-extra-bundle 6.x
+
+### Removed
+- Support for PHP 7.1, 7.2 and 7.3
+- Support for Symfony 4.4, 5.0, 5.1, 5.2
+
+
 ## [3.2.0] - 2021-06-28
 
 ### Added
