@@ -1,9 +1,18 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\EventListener;
+declare(strict_types=1);
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+namespace Shopping\ApiTKDtoMapperBundle\EventListener;
 
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+
+/**
+ * Class ControllerListener.
+ *
+ * Remember, what controller got called in this request, so we can get the corresponding annotation in the ResponseView.
+ *
+ * @package Shopping\ApiTKDtoMapperBundle\EventListener
+ */
 class ControllerListener
 {
     /**
@@ -14,19 +23,20 @@ class ControllerListener
     /**
      * @var callable|null
      */
-    private $calledController = null;
+    private $calledController;
 
-    public function onKernelController(FilterControllerEvent $event)
+    /**
+     * @param ControllerEvent $event
+     */
+    public function onKernelController(ControllerEvent $event): void
     {
-        //Only transform on original action
+        // only transform on original action
         if (!$this->masterRequest) {
             return;
         }
         $this->masterRequest = false;
 
-        if (is_array($event->getController())) {
-            $this->calledController = $event->getController();
-        }
+        $this->calledController = $event->getController();
     }
 
     public function getCalledController(): ?callable

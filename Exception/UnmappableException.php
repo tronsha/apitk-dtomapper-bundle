@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKDtoMapperBundle\Exception;
 
-class MapperException extends \Exception
+use Exception;
+
+class UnmappableException extends Exception
 {
 }

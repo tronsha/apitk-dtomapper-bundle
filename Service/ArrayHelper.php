@@ -1,9 +1,12 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\Service;
+declare(strict_types=1);
+
+namespace Shopping\ApiTKDtoMapperBundle\Service;
 
 /**
- * Class ArrayHelper
+ * Class ArrayHelper.
+ *
  * @package App\Service
  */
 class ArrayHelper
@@ -11,12 +14,17 @@ class ArrayHelper
     /**
      * Returns if the array has only numeric keys.
      *
-     * @param array $array
+     * @param array<mixed, mixed> $array
+     *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
-    public function isNumeric($array): bool
+    public function isNumeric(array $array): bool
     {
-        if (!is_array($array) && !$array instanceof \Traversable) return false;
+        if (empty($array)) {
+            return true;
+        }
 
         foreach ($array as $key => $value) {
             if (!is_int($key)) {

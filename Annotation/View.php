@@ -1,11 +1,14 @@
 <?php
 
-namespace Ofeige\Rfc1Bundle\Annotation;
+declare(strict_types=1);
 
-use \FOS\RestBundle\Controller\Annotations as Rest;
+namespace Shopping\ApiTKDtoMapperBundle\Annotation;
+
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
- * Class View
+ * Class View.
+ *
  * @package App\Annotation
  *
  * @Annotation
@@ -15,10 +18,10 @@ class View extends Rest\View
     /**
      * @var string|null
      */
-    private $dtoMapper = null;
+    private $dtoMapper;
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getDtoMapper(): ?string
     {
@@ -26,12 +29,14 @@ class View extends Rest\View
     }
 
     /**
-     * @param null|string $dtoMapper
+     * @param string|null $dtoMapper
+     *
      * @return View
      */
     public function setDtoMapper(?string $dtoMapper): View
     {
         $this->dtoMapper = $dtoMapper;
+
         return $this;
     }
 }

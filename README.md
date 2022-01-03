@@ -1,30 +1,19 @@
-# RFC1 - DTO handling
+# apitk-dtomapper-bundle - DTO handling
 
 ## Overview
 This bundle adds versioned DTO support for RESTful API's.
 
 ## Installation
-Add this repository to your `composer.json` until it is available at packagist:
-```
-{
-    "repositories": [{
-            "type": "vcs",
-            "url": "git@github.com:ofeige/rfc1-bundle.git"
-        }
-    ]
-}
-```
-
-After that, install the package via composer:
-```
-composer install ofeige/rfc1-bundle:dev-master
+Install the package via composer:
+```bash
+composer require check24/apitk-dtomapper-bundle
 ```
 
 ## Usage
 
 ### Setup
 Add this to your services.yaml so the bundle can automatically load and use the mapper services:
-```
+```yaml
 services:
     App\DtoMapper\:
         resource: '../src/DtoMapper'
@@ -33,9 +22,10 @@ services:
 
 ### Writing Mappers
 
-Create a mapper class in the folder `src/DtoMapper` (or whichever you configured) which implements the `MapperInterface` and transforms incoming data into a single DTO:
-```
-use Ofeige\Rfc1Bundle\DtoMapper\MapperInterface;
+Create a mapper class in the folder `src/DtoMapper` (or whichever you configured) which implements the
+`MapperInterface` and transforms incoming data into a single DTO:
+```php
+use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 
 class UserV1Mapper implements MapperInterface
 {
@@ -43,7 +33,7 @@ class UserV1Mapper implements MapperInterface
      * @param User $data
      * @return Dto\UserV1
      */
-    public function map($data)
+    public function map($data): Dto\UserV1
     {
         $userDto = new Dto\UserV1();
         $userDto->setId($data->getId())
@@ -55,13 +45,14 @@ class UserV1Mapper implements MapperInterface
 }
 ```
 
-In your controller replace the `@Rest\View()` annotation with the corresponding `@Rfc1\View()` mentioning the mapper to use:
-```
-use Ofeige\Rfc1Bundle\Annotation as Rfc1;
+In your controller replace the `@Rest\View()` annotation with the corresponding `@Dto\View()` mentioning
+the mapper to use:
+```php
+use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 
 /**
  * @Rest\Get("/v1/users")
- * @Rfc1\View(dtoMapper="App\DtoMapper\UserV1Mapper")
+ * @DtoMapper\View(dtoMapper="App\DtoMapper\UserV1Mapper")
  *
  * @param EntityManagerInterface $entityManager
  * @return User[]
@@ -76,21 +67,35 @@ public function getUsersV1(EntityManagerInterface $entityManager)
 }
 ```
 
-The bundle now automatically transform whatever you return in the action with the help of the given mapper into an DTO. When you return an array of data in your controller, the mapper will be called on every single element. You don't have to worry about that.
+The bundle now automatically transform whatever you return in the action with the help of the given 
+mapper into an DTO. When you return an array of data in your controller, the mapper will be called on 
+every single element. You don't have to worry about that.
+
+You can throw a `UnmappableException` if you want to skip some elements of the array.
+
+Also the bundle auto generates a swagger response with code 200 and the corresponding DTO scheme 
+(respectively an array of DTOs), so you don't have to add the redundant `@SWG\Response()`. For this 
+to work, just take care that your Mapper has a correct return typehint (f.e. 
+`public function map($data): FoobarDto`) and that your controller action has a return annotation, 
+which states if an array or object is returned (f.e. `* @return Foobar[]`). You can still overwrite 
+this by your own `@SWG\Response()` annotation.
 
 ### Serialized DTO view
-If you wish to return the DTOs in a `serialize($dto)` manner instead of json, implement the available dto view handler.
+If you wish to return the DTOs in a `serialize($dto)` manner instead of json, implement the available 
+dto view handler.
 
-```
+```yaml
 //fos_rest.yaml
 fos_rest:
     view:
         mime_types:
-            dto: ['application/vnd.demo.dto'] # You can specify whatever mime type you want, just map it to "dto".
+            dto: ['application/vnd.dto'] # You can specify whatever mime type you want, just map it to "dto".
     service:
         view_handler: app.view_handler
+    exception:
+        serializer_error_renderer: true
 ```
-```
+```yaml
 //services.yaml
 services:
     app.view_handler:
@@ -99,7 +104,11 @@ services:
         public: false
         parent: fos_rest.view_handler.default
         calls:
-            - ['registerHandler', ['dto', ['@Ofeige\Rfc1Bundle\Handler\PhpViewHandler', 'createResponse']]]
+            - ['registerHandler', ['dto', ['@Shopping\ApiTKDtoMapperBundle\Handler\PhpViewHandler', 'createResponse']]]
 ```
 
-When calling the API with the `Accept: application/vnd.demo.dto` header, you will get the DTO as an unserializable string.
+When calling the API with the `Accept: application/vnd.dto` header, you will get the DTO as an 
+unserializable string.
+
+Exceptions will also be serialized. Stack Traces, filenames, line numbers and previous exceptions will be omitted
+when `kernel.debug` is set to `false` (= in productive environments) to avoid leaking potentially sensitive information.
