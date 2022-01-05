@@ -36,6 +36,7 @@
     "friendsofsymfony/rest-bundle": "^3.0"
   },
   "require-dev": {
+    "google/protobuf": "^3.19",
     "captainhook/captainhook": "^5.0",
     "captainhook/plugin-composer": "^5.1",
     "symfony/error-handler": ">= 5.3 <6.0",

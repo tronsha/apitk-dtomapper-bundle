@@ -21,6 +21,8 @@ services:
 
     Shopping\ApiTKDtoMapperBundle\Handler\PhpViewHandler: ~
 
+    Shopping\ApiTKDtoMapperBundle\Handler\ProtobufViewHandler: ~
+
     Shopping\ApiTKDtoMapperBundle\Serializer\DtoEncoder:
         tags:
             - { name: serializer.encoder }

@@ -48,6 +48,7 @@ class UserV1Mapper implements MapperInterface
 In your controller replace the `@Rest\View()` annotation with the corresponding `@Dto\View()` mentioning
 the mapper to use:
 ```php
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Shopping\ApiTKDtoMapperBundle\Annotation as DtoMapper;
 
 /**
@@ -112,3 +113,29 @@ unserializable string.
 
 Exceptions will also be serialized. Stack Traces, filenames, line numbers and previous exceptions will be omitted
 when `kernel.debug` is set to `false` (= in productive environments) to avoid leaking potentially sensitive information.
+
+### Serialized Protobuf view
+If you wish to return Protobuf.
+
+```yaml
+//fos_rest.yaml
+fos_rest:
+    view:
+        mime_types:
+            proto: ['application/x-protobuf'] # You can specify whatever mime type you want, just map it to "protobuf".
+    service:
+        view_handler: app.view_handler
+    exception:
+        serializer_error_renderer: true
+```
+```yaml
+//services.yaml
+services:
+    app.view_handler:
+        autowire: true
+        autoconfigure: false
+        public: false
+        parent: fos_rest.view_handler.default
+        calls:
+            - ['registerHandler', ['proto', ['@Shopping\ApiTKDtoMapperBundle\Handler\ProtobufViewHandler', 'createResponse']]]
+```
