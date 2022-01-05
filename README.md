@@ -115,14 +115,14 @@ Exceptions will also be serialized. Stack Traces, filenames, line numbers and pr
 when `kernel.debug` is set to `false` (= in productive environments) to avoid leaking potentially sensitive information.
 
 ### Serialized Protobuf view
-If you wish to return Protobuf.
+If you wish to return serialized Protobuf object.
 
 ```yaml
 //fos_rest.yaml
 fos_rest:
     view:
         mime_types:
-            proto: ['application/x-protobuf'] # You can specify whatever mime type you want, just map it to "protobuf".
+            proto: ['application/x-protobuf'] # You can specify whatever mime type you want, just map it to "proto".
     service:
         view_handler: app.view_handler
     exception:
