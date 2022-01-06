@@ -107,9 +107,9 @@ class UserV1Mapper implements MapperInterface, MapperCollectionInterface
         return $collection;
     }
 
-     /**
-      * @param Dto\UserV1 $data
-      */
+    /**
+     * @param Dto\UserV1 $data
+     */
     public function map($data): Dto\UserV1
     {
         $userDto = new Dto\UserV1();
