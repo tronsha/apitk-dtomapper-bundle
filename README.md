@@ -97,6 +97,9 @@ use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 
 class UserV1Mapper implements MapperInterface, MapperCollectionInterface
 {
+    /**
+     * @param Dto\UserV1[] $items
+     */
     public function mapCollection(array $items) {
         $collection = new UserV1Collection();
         $collection->setItems($items);
@@ -104,6 +107,9 @@ class UserV1Mapper implements MapperInterface, MapperCollectionInterface
         return $collection;
     }
 
+     /**
+      * @param Dto\UserV1 $data
+      */
     public function map($data): Dto\UserV1
     {
         $userDto = new Dto\UserV1();
