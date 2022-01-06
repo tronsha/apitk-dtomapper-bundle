@@ -9,6 +9,7 @@ use Exception;
 use ReflectionException;
 use ReflectionObject;
 use Shopping\ApiTKDtoMapperBundle\Annotation as Dto;
+use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperCollectionInterface;
 use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
 use Shopping\ApiTKDtoMapperBundle\Exception\MapperException;
 use Shopping\ApiTKDtoMapperBundle\Exception\UnmappableException;
@@ -148,6 +149,9 @@ class MapperListener
                 } catch (UnmappableException $exception) {
                     // Data is not mappable and therefore we don't add it to the array
                 }
+            }
+            if ($mapper instanceof MapperCollectionInterface) {
+                $mappedData = $mapper->mapCollection($mappedData);
             }
         } else {
             try {
