@@ -100,7 +100,7 @@ class UserV1Mapper implements MapperInterface, MapperCollectionInterface
     /**
      * @param Dto\UserV1[] $items
      */
-    public function mapCollection(array $items) {
+    public function mapCollection(array $items): Dto\UserV1Collection {
         $collection = new UserV1Collection();
         $collection->setItems($items);
 
