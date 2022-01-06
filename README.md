@@ -81,6 +81,45 @@ to work, just take care that your Mapper has a correct return typehint (f.e.
 which states if an array or object is returned (f.e. `* @return Foobar[]`). You can still overwrite 
 this by your own `@SWG\Response()` annotation.
 
+### Turning arrays into Collections
+
+If you return an array in the controller it will be serialized like this. If you do not want to work
+with an array or can not work with arrays due to technological constraints (protobuf) you can instruct
+the bundle to turn arrays into collection-classes instead.
+
+To turn an array returned from a controller into a collection, implement the MapperCollectionInterface 
+additionally to the MapperInterface into your mapper.
+
+Example: 
+```php
+use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperCollectionInterface;
+use Shopping\ApiTKDtoMapperBundle\DtoMapper\MapperInterface;
+
+class UserV1Mapper implements MapperInterface, MapperCollectionInterface
+{
+    public function mapCollection(array $items) {
+        $collection = new UserV1Collection();
+        $collection->setItems($items);
+
+        return $collection;
+    }
+
+    public function map($data): Dto\UserV1
+    {
+        $userDto = new Dto\UserV1();
+        $userDto->setId($data->getId())
+            ->setUsername($data->getUsername())
+            ->setEmail($data->getEmail());
+
+        return $userDto;
+    }
+}
+```
+
+This will cause the bundle to call `mapCollection` as soon as all items have been mapped via `map`. 
+You can initialize your collection class within the `mapCollection` method. The object returned 
+here will replace the controller response's content.
+
 ### Serialized DTO view
 If you wish to return the DTOs in a `serialize($dto)` manner instead of json, implement the available 
 dto view handler.

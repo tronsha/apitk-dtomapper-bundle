@@ -8,6 +8,7 @@ namespace Shopping\ApiTKDtoMapperBundle\Handler;
 
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler;
+use Google\Protobuf\Internal\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,6 +31,16 @@ class PhpViewHandler
      */
     public function createResponse(ViewHandler $handler, View $view, Request $request, $format): Response
     {
-        return new Response(serialize($view->getData()), $view->getStatusCode() ?? 200, $view->getHeaders());
+        $data = $view->getData();
+
+        if ($data instanceof Message) {
+            return new Response(
+                '',
+                Response::HTTP_NOT_ACCEPTABLE,
+                $view->getHeaders()
+            );
+        }
+
+        return new Response(serialize($data), $view->getStatusCode() ?? 200, $view->getHeaders());
     }
 }
